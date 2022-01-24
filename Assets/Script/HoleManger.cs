@@ -12,44 +12,36 @@ public class HoleManger : MonoBehaviour
     void Start()
     {
         childrenCount = gameObject.transform.childCount; //获取子节点的数量
-
         for (int i = 0; i < childrenCount; i++)
         {
-            holes.Add(transform.GetChild(i).gameObject); //从场景里获取名字为指定命名的物体并添加到Holes列表中
-            Debug.Log(holes[i].name);
+            holes.Add(transform.GetChild(i).gameObject); //将获取到的”坑“的GameObject存入holes列表中
         }
     }
 
 
     void Update()
     {
-        GameObject mole = new GameObject();
-
-
-        showHole(mole);
+        OnMoleShow();
     }
 
-    private float delayShowTime;
-    void showHole(GameObject mole)
+    private float tempShowTime;
+    private GameObject moleControl;
+
+    private bool moleState;
+
+    void OnMoleShow()
     {
-        delayShowTime += Time.deltaTime;
-        if (delayShowTime > 1.0f)
+        if (moleState != true)
         {
-
-            Debug.Log(Time.time);
-            var random = Random.Range(0, holes.Count); //获取到一个随机数，数值最大值为holes的长度
-            mole.SetActive(false);
-            //遍历随机到的hole的子物体，如果名字为tex_mole 则把他显示出来
-
-            for (int i = 0; i < holes[random].transform.childCount; i++)
+            var random = Random.Range(0, holes.Count);
+            tempShowTime += Time.deltaTime;
+            if (tempShowTime > 1.0f)
             {
-                if (holes[random].transform.GetChild(i).name == "tex_mole")
-                {
-                    mole = holes[random].transform.GetChild(i).gameObject; //获取到Hole下第0个物体
-                }
+                moleControl = holes[random].transform.GetChild(0).gameObject;
+                moleControl.SetActive(true);
+                
+                moleState = true;
             }
-            mole.SetActive(true);
-            delayShowTime = 0.0f;
         }
     }
 }
