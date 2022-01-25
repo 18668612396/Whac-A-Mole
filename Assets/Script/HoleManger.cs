@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 public class HoleManger : MonoBehaviour
 {
-    public List<GameObject> holes = new List<GameObject>();
+    private List<GameObject> holes = new List<GameObject>();
     private int childrenCount; //存储子节点的数量
 
     void Start()
@@ -18,30 +19,24 @@ public class HoleManger : MonoBehaviour
         }
     }
 
+    private GameObject hole;
+    private float moleShowTime;
 
     void Update()
     {
-        OnMoleShow();
-    }
+        var random = Random.Range(0, holes.Count);
+        hole = holes[random].gameObject;
 
-    private float tempShowTime;
-    private GameObject moleControl;
-
-    private bool moleState;
-
-    void OnMoleShow()
-    {
-        if (moleState != true)
+        moleShowTime += Time.deltaTime;
+        if (!hole.GetComponent<HoleControl>().moleState)
         {
-            var random = Random.Range(0, holes.Count);
-            tempShowTime += Time.deltaTime;
-            if (tempShowTime > 1.0f)
+            if (moleShowTime > 1.0f)
             {
-                moleControl = holes[random].transform.GetChild(0).gameObject;
-                moleControl.SetActive(true);
-                
-                moleState = true;
+                hole.GetComponent<HoleControl>().MoleShow();
+                moleShowTime = 0;
             }
         }
     }
+    private float tempShowTime;
+    private bool moleState;
 }
