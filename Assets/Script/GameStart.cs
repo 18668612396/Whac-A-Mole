@@ -18,7 +18,7 @@ public class GameStart : MonoBehaviour
 
     public void ClickButton()
     {
-        SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
         Debug.Log("GaneStart");
     }
 }

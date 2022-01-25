@@ -17,19 +17,21 @@ public class AddGrade : MonoBehaviour
     {
         grade += grades;
         GameObject.Find("Grade").GetComponent<TextMesh>().text = grade.ToString();
-        Debug.Log(grade);
+  
 
-        switch (grade)
-        {
-            case < 0:
-                GameObject.Find("YouLose").GetComponent<MeshRenderer>().enabled = true;
-                Debug.Log("test");
-                Time.timeScale = 0f;
-                break;
-            case 20:
-                GameObject.Find("YouWin").GetComponent<MeshRenderer>().enabled = true;
-                Time.timeScale = 0f;
-                break;
-        }
+        // switch (grade)
+        // {
+        //     case < 0:
+        //         GameObject.Find("YouLose").GetComponent<MeshRenderer>().enabled = true;
+        //
+        //         Time.timeScale = 0f;
+        //         break;
+        //     case 20:
+        //         GameObject.Find("YouWin").GetComponent<MeshRenderer>().enabled = true;
+        //         Time.timeScale = 0f;
+        //         break;
+        // }
     }
+    
+    
 }
