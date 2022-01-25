@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class HoleControl : MonoBehaviour
 {
+    public GameObject moleAudio;
     private GameObject mole;
     private GameObject moleParticle;
     public bool moleState;
@@ -51,7 +53,9 @@ public class HoleControl : MonoBehaviour
             moleParticle.GetComponent<ParticleSystem>().Play();
             mole.SetActive(false);
             AddGrade.AddGradeNumber(1);
+            moleAudio.GetComponent<AudioSource>().Play();
             
         }
     }
+
 }

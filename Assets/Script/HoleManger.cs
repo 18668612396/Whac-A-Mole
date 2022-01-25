@@ -7,12 +7,10 @@ using UnityEngine;
 
 public class HoleManger : MonoBehaviour
 {
-    private List<GameObject> holes = new List<GameObject>();
-    private int childrenCount; //存储子节点的数量
-
+    private List<GameObject> holes = new List<GameObject>(); //声明一个存储洞的数组
     void Start()
     {
-        childrenCount = gameObject.transform.childCount; //获取子节点的数量
+        var childrenCount = gameObject.transform.childCount; //获取子节点的数量
         for (int i = 0; i < childrenCount; i++)
         {
             holes.Add(transform.GetChild(i).gameObject); //将获取到的”坑“的GameObject存入holes列表中
@@ -21,7 +19,6 @@ public class HoleManger : MonoBehaviour
 
     private GameObject hole;
     private float moleShowTime;
-
     void Update()
     {
         var random = Random.Range(0, holes.Count);
@@ -37,6 +34,4 @@ public class HoleManger : MonoBehaviour
             }
         }
     }
-    private float tempShowTime;
-    private bool moleState;
 }
