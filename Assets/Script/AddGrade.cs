@@ -1,37 +1,39 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AddGrade : MonoBehaviour
 {
     public static int grade = 0;
-
+    
+    public static float gameHard;//游戏难度
     private void Start()
     {
         grade = 0;
     }
 
-    public static  void AddGradeNumber(int grades)
+    public static void AddGradeNumber(int number)
     {
-        grade += grades;
-        GameObject.Find("Grade").GetComponent<TextMesh>().text = grade.ToString();
-  
+        grade += number;
+        GameObject.Find("GradeNumber").GetComponent<Text>().text = grade.ToString();
 
-        // switch (grade)
-        // {
-        //     case < 0:
-        //         GameObject.Find("YouLose").GetComponent<MeshRenderer>().enabled = true;
-        //
-        //         Time.timeScale = 0f;
-        //         break;
-        //     case 20:
-        //         GameObject.Find("YouWin").GetComponent<MeshRenderer>().enabled = true;
-        //         Time.timeScale = 0f;
-        //         break;
-        // }
+        switch (grade)
+        {
+            case < 0:
+                GameObject.Find("YouLose").GetComponent<Text>().enabled = true;
+
+                GameOver();
+                break;
+            case 99:
+                GameObject.Find("YouWin").GetComponent<Text>().enabled = true;
+
+                GameOver();
+                break;
+        }
     }
-    
-    
+
+    static void GameOver()
+    {
+        Time.timeScale = 0.0f;
+    }
 }

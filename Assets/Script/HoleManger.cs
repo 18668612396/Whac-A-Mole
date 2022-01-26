@@ -8,7 +8,7 @@ using UnityEngine;
 public class HoleManger : MonoBehaviour
 {
     private List<GameObject> holes = new List<GameObject>(); //声明一个存储洞的数组
-
+    private float gameHard;
     void Start()
     {
         var childrenCount = gameObject.transform.childCount; //获取子节点的数量
@@ -28,7 +28,7 @@ public class HoleManger : MonoBehaviour
         moleShowTime += Time.deltaTime;//更新临时时间变量
         if (!hole.GetComponent<HoleControl>().isActiveAndEnabled)
         {
-            if (moleShowTime > 1.0f)
+            if (moleShowTime > AddGrade.gameHard)
             {
                 hole.GetComponent<HoleControl>().enabled = true;//将脚本打开
                 moleShowTime = 0;//重置临时时间变量
